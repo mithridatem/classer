@@ -18,8 +18,8 @@
         echo json_encode($tab);
     }
     else{
-        $tab = $article->showArticle($bdd);
+        $tab = $article->showAllArticle($bdd);
         echo json_encode($tab);
     }
-    
+
 ?>

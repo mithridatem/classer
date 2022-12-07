@@ -1,6 +1,5 @@
 //récupération de l'élément HTML
 const articles = document.querySelector('#liste');
-const filtre = document.querySelector('#search');
 //récupération du bouton
 const bt = document.querySelector('#bt');
 let url = "";
@@ -9,18 +8,19 @@ const {
     host, hostname, href, origin, pathname, port, protocol, search
   } = window.location
 //si search est différent de vide
-if(search!=''){
-    url = "http://localhost/classer/get"+search;
+if(search==''){
+    console.log('cas 1')
+    url = "http://localhost/classer/get"; 
 }
-//sinon
-else{
-    url = "http://localhost/classer/get";
+if(search!=''){
+    console.log('cas 2')
+    console.log(search)
+    url = "http://localhost/classer/get"+search;
 }
 //fonction qui récupére les articles
 async function getArticle(url){
     //récupéation du json
     const list = await fetch(url);
-    
     //convertion en tableau
     const choice = await list.json();
     console.log(choice);

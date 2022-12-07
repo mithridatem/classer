@@ -20,13 +20,13 @@
             }
         
         }
-        public function showAllArticle($bdd):?array{
+        public function showAllArticle($bdd){
             try {
-                $requete = "SELECT article.id_article, nom_article,
-                CONCAT('[', GROUP_CONCAT(CONCAT('`',nom_cat,'`') ORDER BY nom_cat ASC SEPARATOR ', '),']') AS `liste` 
+                $requete = "SELECT article.id_article AS id, nom_article AS nom,
+                GROUP_CONCAT(CONCAT(nom_cat )ORDER BY nom_cat ASC SEPARATOR ',')AS categories
                 FROM associer INNER JOIN article ON associer.id_article = article.id_article
-                INNER JOIN categories ON associer.id_cat = categories.id_cat
-                GROUP BY article.id_article";
+                INNER JOIN categories ON associer.id_cat = categories.id_cat 
+                GROUP BY article.id_article ;";
                 $req = $bdd->prepare($requete);
                 $req->execute();
                 $data = $req->fetchAll(PDO::FETCH_ASSOC);
